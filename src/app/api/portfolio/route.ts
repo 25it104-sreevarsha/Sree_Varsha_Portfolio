@@ -19,12 +19,16 @@ import {
 import { DEFAULT_PORTFOLIO_DATA } from "@/lib/default-portfolio-data";
 import { eq } from "drizzle-orm";
 
-const ADMIN_PASSKEY = process.env.ADMIN_PASSKEY || "signature-2026";
+const ADMIN_PASSKEY = process.env.ADMIN_PASSKEY;
 
 function verifyAuth(req: NextRequest): boolean {
   const headerKey = req.headers.get("x-admin-passkey");
-  if (!headerKey) return false;
-  return headerKey === ADMIN_PASSKEY;
+
+  return Boolean(
+    ADMIN_PASSKEY &&
+    headerKey &&
+    headerKey === ADMIN_PASSKEY
+  );
 }
 
 export async function GET() {
@@ -46,7 +50,9 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     if (body.action === "verify-passkey") {
-      const valid = body.passkey === ADMIN_PASSKEY;
+      const valid = Boolean(
+  ADMIN_PASSKEY && body.passkey === ADMIN_PASSKEY
+);
       return NextResponse.json({
         status: valid ? "ok" : "unauthorized",
         valid,

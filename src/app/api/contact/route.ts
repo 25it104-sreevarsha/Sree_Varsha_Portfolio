@@ -4,12 +4,12 @@ import { contactMessages } from "@/db/schema";
 import { ensurePortfolioSchemaAndSeed, getContactMessages } from "@/lib/portfolio-service";
 import { eq } from "drizzle-orm";
 
-const ADMIN_PASSKEY = process.env.ADMIN_PASSKEY || "signature-2026";
+const ADMIN_PASSKEY = process.env.ADMIN_PASSKEY;
 
 export async function GET(req: NextRequest) {
   try {
     const passkey = req.headers.get("x-admin-passkey");
-    if (passkey !== ADMIN_PASSKEY) {
+    if (!ADMIN_PASSKEY || passkey !== ADMIN_PASSKEY)  {
       return NextResponse.json(
         { status: "error", message: "Unauthorized" },
         { status: 401 }
@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   try {
     const passkey = req.headers.get("x-admin-passkey");
-    if (passkey !== ADMIN_PASSKEY) {
+    if (!ADMIN_PASSKEY || passkey !== ADMIN_PASSKEY) {
       return NextResponse.json({ status: "error", message: "Unauthorized" }, { status: 401 });
     }
     const { id, status } = await req.json();
@@ -111,7 +111,7 @@ export async function PATCH(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   try {
     const passkey = req.headers.get("x-admin-passkey");
-    if (passkey !== ADMIN_PASSKEY) {
+    if (!ADMIN_PASSKEY || passkey !== ADMIN_PASSKEY)  {
       return NextResponse.json({ status: "error", message: "Unauthorized" }, { status: 401 });
     }
     const { searchParams } = new URL(req.url);

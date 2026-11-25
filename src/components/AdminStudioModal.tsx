@@ -43,7 +43,7 @@ export function AdminStudioModal({
   portfolio,
   onPortfolioUpdated,
 }: AdminStudioModalProps) {
-  const [passkey, setPasskey] = useState("signature-2026");
+  const [passkey, setPasskey] = useState("");
   const [unlocked, setUnlocked] = useState(false);
   const [authError, setAuthError] = useState("");
   const [activeTab, setActiveTab] = useState(initialTab);
