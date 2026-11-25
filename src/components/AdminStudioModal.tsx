@@ -87,7 +87,7 @@ export function AdminStudioModal({
         setUnlocked(true);
         showNotice("Studio unlocked. You have full live editing control.");
       } else {
-        setAuthError("Invalid studio passkey. Default is 'signature-2026'.");
+        setAuthError("Invalid studio passkey.");
       }
     } catch {
       setAuthError("Could not verify passkey.");
@@ -379,7 +379,7 @@ export function AdminStudioModal({
                   className="w-full rounded-xl border border-white/15 bg-black/50 px-4 py-2.5 font-mono text-sm text-white focus:border-violet-400 focus:outline-none"
                 />
                 <p className="mt-2 font-mono text-[11px] text-cyan-300">
-                  Default owner passkey: <code className="rounded bg-white/10 px-1.5 py-0.5">signature-2026</code> (pre-filled for instant verification)
+                  Section restricted to Owner <code className="rounded bg-white/10 px-1.5 py-0.5">Enter User PassKey</code> 
                 </p>
               </div>
 
