@@ -8,8 +8,9 @@ export async function GET() {
     const resumePath = path.join(
       process.cwd(),
       "public",
+      "files",
       "resume",
-      "Sree-Varsha-Resume.pdf"
+      "resume.pdf"
     );
 
     const pdfBuffer = await readFile(resumePath);
@@ -19,7 +20,7 @@ export async function GET() {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition":
-          'attachment; filename="Sree-Varsha-Resume.pdf"',
+          'attachment; filename="resume.pdf"',
         "Cache-Control": "no-store",
       },
     });
