@@ -2284,10 +2284,16 @@ export function PortfolioExperience({ initialData }: PortfolioExperienceProps) {
 
                 {/* Direct Email & Resume Actions */}
                 <div className="space-y-3 pt-2">
-                  <a
-                    href={`mailto:${portfolio.profile.email}`}
-                    className="flex items-center justify-between rounded-2xl border border-violet-500/35 bg-violet-500/10 p-4 transition hover:bg-violet-500/20"
-                  >
+                  
+<a
+  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+    portfolio.profile.email
+  )}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-center justify-between rounded-2xl border border-violet-500/35 bg-violet-500/10 p-4 transition hover:bg-violet-500/20"
+>
+
                     <div className="flex items-center gap-3">
                       <Mail className="h-5 w-5 text-violet-400" />
                       <div>
