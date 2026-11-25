@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#211735"/><stop offset=".55" stop-color="#15283c"/><stop offset="1" stop-color="#0b0d16"/></linearGradient><radialGradient id="r"><stop stop-color="#a78bfa" stop-opacity=".35"/><stop offset="1" stop-color="#78c8ff" stop-opacity="0"/></radialGradient></defs>
+<rect width="1200" height="750" fill="url(#g)"/><circle cx="780" cy="330" r="390" fill="url(#r)"/>
+<g fill="none" stroke="#bca9ff" stroke-opacity=".35"><circle cx="600" cy="375" r="210"/><circle cx="600" cy="375" r="165"/><path d="M300 375h600M600 75v600"/></g>
+<text x="600" y="360" text-anchor="middle" fill="#eee9ff" font-family="Arial,sans-serif" font-size="38" letter-spacing="12">PROJECT VISUAL</text>
+<text x="600" y="415" text-anchor="middle" fill="#a9a4bc" font-family="Arial,sans-serif" font-size="18" letter-spacing="5">REPLACE WITH YOUR SCREENSHOT</text>
+</svg>

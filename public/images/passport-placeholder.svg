@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 450" fill="none">
+  <defs>
+    <radialGradient id="aura" cx="50%" cy="38%" r="60%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.38" />
+      <stop offset="55%" stop-color="#06B6D4" stop-opacity="0.14" />
+      <stop offset="100%" stop-color="#07080C" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.7" />
+      <stop offset="50%" stop-color="#06B6D4" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0.2" />
+    </linearGradient>
+    <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+      <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="350" height="450" fill="#0B0D16"/>
+  <rect width="350" height="450" fill="url(#grid)"/>
+  <circle cx="175" cy="185" r="150" fill="url(#aura)"/>
+
+  <!-- Biometric Registration Marks -->
+  <path d="M28 52 V28 H52" stroke="#06B6D4" stroke-width="2" stroke-linecap="round"/>
+  <path d="M322 52 V28 H298" stroke="#06B6D4" stroke-width="2" stroke-linecap="round"/>
+  <path d="M28 398 V422 H52" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
+  <path d="M322 398 V422 H298" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Subtle Passport Ratio Guide Frame -->
+  <rect x="38" y="38" width="274" height="374" rx="18" stroke="url(#rim)" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- Minimalist Architectural Silhouette (No fake AI face) -->
+  <circle cx="175" cy="155" r="52" fill="#131726" stroke="url(#rim)" stroke-width="2"/>
+  <path d="M90 320 C90 258 128 228 175 228 C222 228 260 258 260 320" fill="#131726" stroke="url(#rim)" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Optical Axis Lines -->
+  <line x1="175" y1="75" x2="175" y2="95" stroke="#06B6D4" stroke-opacity="0.45" stroke-width="1.5"/>
+  <line x1="100" y1="155" x2="115" y2="155" stroke="#06B6D4" stroke-opacity="0.45" stroke-width="1.5"/>
+  <line x1="235" y1="155" x2="250" y2="155" stroke="#06B6D4" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- Status Pill -->
+  <rect x="55" y="346" width="240" height="44" rx="10" fill="#07080C" fill-opacity="0.88" stroke="#7C3AED" stroke-opacity="0.45"/>
+  <text x="175" y="365" text-anchor="middle" fill="#F8FAFC" font-family="monospace" font-size="10" font-weight="bold" letter-spacing="1.8">PASSPORT FRAME [3.5 : 4.5]</text>
+  <text x="175" y="381" text-anchor="middle" fill="#06B6D4" font-family="monospace" font-size="9" letter-spacing="1.2">UPLOAD REAL PHOTO IN STUDIO</text>
+</svg>
