@@ -92,7 +92,7 @@ export function InteractiveEnvironment({ theme }: InteractiveEnvironmentProps) {
           <div className="relative flex flex-col items-center gap-4 px-6 text-center">
             <div className="flex items-center gap-2.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-1.5 font-mono text-xs tracking-[0.22em] text-violet-300 uppercase">
               <span className="h-2 w-2 animate-ping rounded-full bg-cyan-400" />
-              Portfolio // MODEL B
+              Sree Varsha's Portfolio 
             </div>
             <div className="h-1 w-48 overflow-hidden rounded-full bg-white/10">
               <div className="h-full w-full origin-left animate-pulse bg-gradient-to-r from-violet-500 via-cyan-400 to-violet-400" />
