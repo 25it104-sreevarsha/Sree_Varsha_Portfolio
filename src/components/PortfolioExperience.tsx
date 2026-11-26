@@ -773,14 +773,14 @@ export function PortfolioExperience({ initialData }: PortfolioExperienceProps) {
                   </span>
                 )}
                 {portfolio.education.some(
-                  (edu) => !isSchoolRecord(edu.degree)
+                  (edu) => !isSchoolRecord(`${edu.degree} ${edu.department}`)
                 ) && (
                   <span className="inline-flex items-center gap-1.5">
                     <GraduationCap className="h-3.5 w-3.5 text-violet-400" />
                     CGPA:{" "}
                     <strong className="text-cyan-300">
                       {portfolio.education.find(
-                        (edu) => !isSchoolRecord(edu.degree)
+                        (edu) => !isSchoolRecord(`${edu.degree} ${edu.department}`)
                       )?.cgpa || "Editable in Studio"}
                     </strong>
                   </span>
@@ -1588,7 +1588,7 @@ export function PortfolioExperience({ initialData }: PortfolioExperienceProps) {
             </div>
 
             {portfolio.education.some(
-              (edu) => !isSchoolRecord(edu.degree)
+              (edu) => !isSchoolRecord(`${edu.degree} ${edu.department}`)
             ) && (
               <button
                 type="button"
@@ -1618,7 +1618,7 @@ export function PortfolioExperience({ initialData }: PortfolioExperienceProps) {
                         {edu.duration}
                       </span>
                       <span className="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-0.5 font-mono text-xs text-cyan-300">
-                        {edu.currentSemester}
+                        {isSchoolRecord(`${edu.degree} ${edu.department}`) ? "Completed" : edu.currentSemester}
                       </span>
                       {edu.isPlaceholder && (
                         <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-0.5 font-mono text-[10px] text-amber-300">
@@ -1636,7 +1636,7 @@ export function PortfolioExperience({ initialData }: PortfolioExperienceProps) {
 
                   {/* Prominent Editable CGPA & Board Marks Telemetry Boxes */}
                   <div className="flex flex-wrap gap-3">
-                    {!isSchoolRecord(edu.degree) && (
+                    {!isSchoolRecord(`${edu.degree} ${edu.department}`) && (
                       <button
                         type="button"
                         onClick={() => openStudio("education")}
