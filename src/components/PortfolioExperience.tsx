@@ -88,6 +88,16 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   GitBranch,
 };
 
+/**
+ * Identifies school-level education records so CGPA is shown only for
+ * college / university records.
+ */
+function isSchoolRecord(degree: string): boolean {
+  return /school|class\s*(x|10|xi|11|xii|12)\b|\b(10th|12th)\b|sslc|hsc|higher secondary|secondary/i.test(
+    degree || ""
+  );
+}
+
 /* Animated counter — genuine values from the live database, eased on mount */
 function useAnimatedNumber(target: number, duration = 1500): number {
   const [value, setValue] = useState(0);
@@ -762,13 +772,19 @@ export function PortfolioExperience({ initialData }: PortfolioExperienceProps) {
                     {portfolio.profile.location}
                   </span>
                 )}
-                <span className="inline-flex items-center gap-1.5">
-                  <GraduationCap className="h-3.5 w-3.5 text-violet-400" />
-                  CGPA:{" "}
-                  <strong className="text-cyan-300">
-                    {portfolio.education[0]?.cgpa || "Editable in Studio"}
-                  </strong>
-                </span>
+                {portfolio.education.some(
+                  (edu) => !isSchoolRecord(edu.degree)
+                ) && (
+                  <span className="inline-flex items-center gap-1.5">
+                    <GraduationCap className="h-3.5 w-3.5 text-violet-400" />
+                    CGPA:{" "}
+                    <strong className="text-cyan-300">
+                      {portfolio.education.find(
+                        (edu) => !isSchoolRecord(edu.degree)
+                      )?.cgpa || "Editable in Studio"}
+                    </strong>
+                  </span>
+                )}
                 <span
                   className="inline-flex items-center gap-1.5"
                   title="Your local time"
@@ -1571,14 +1587,18 @@ export function PortfolioExperience({ initialData }: PortfolioExperienceProps) {
               </p>
             </div>
 
-            <button
-              type="button"
-              onClick={() => openStudio("education")}
-              className="inline-flex items-center gap-2 rounded-xl border border-cyan-500/40 bg-cyan-500/15 px-4 py-2.5 font-mono text-xs font-semibold text-cyan-300 transition hover:bg-cyan-500/25"
-            >
-              <Edit3 className="h-3.5 w-3.5" />
-              Update Semester CGPA
-            </button>
+            {portfolio.education.some(
+              (edu) => !isSchoolRecord(edu.degree)
+            ) && (
+              <button
+                type="button"
+                onClick={() => openStudio("education")}
+                className="inline-flex items-center gap-2 rounded-xl border border-cyan-500/40 bg-cyan-500/15 px-4 py-2.5 font-mono text-xs font-semibold text-cyan-300 transition hover:bg-cyan-500/25"
+              >
+                <Edit3 className="h-3.5 w-3.5" />
+                Update Semester CGPA
+              </button>
+            )}
           </div>
 
           <div className="space-y-6">
@@ -1616,19 +1636,21 @@ export function PortfolioExperience({ initialData }: PortfolioExperienceProps) {
 
                   {/* Prominent Editable CGPA & Board Marks Telemetry Boxes */}
                   <div className="flex flex-wrap gap-3">
-                    <button
-                      type="button"
-                      onClick={() => openStudio("education")}
-                      title="Click to update CGPA for the new semester"
-                      className="group rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-4 py-2.5 text-left transition hover:bg-cyan-500/20"
-                    >
-                      <div className="font-mono text-[10px] tracking-wider text-cyan-300 uppercase">
-                        CURRENT CGPA (CLICK TO EDIT)
-                      </div>
-                      <div className="font-mono text-lg font-extrabold text-white">
-                        {edu.cgpa}
-                      </div>
-                    </button>
+                    {!isSchoolRecord(edu.degree) && (
+                      <button
+                        type="button"
+                        onClick={() => openStudio("education")}
+                        title="Click to update CGPA for the new semester"
+                        className="group rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-4 py-2.5 text-left transition hover:bg-cyan-500/20"
+                      >
+                        <div className="font-mono text-[10px] tracking-wider text-cyan-300 uppercase">
+                          CURRENT CGPA (CLICK TO EDIT)
+                        </div>
+                        <div className="font-mono text-lg font-extrabold text-white">
+                          {edu.cgpa}
+                        </div>
+                      </button>
+                    )}
 
                     {edu.class12Marks && (
                       <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-2.5">

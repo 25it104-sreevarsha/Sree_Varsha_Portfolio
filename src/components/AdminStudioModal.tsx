@@ -28,6 +28,11 @@ import {
   AlertCircle,
 } from "lucide-react";
 
+function isSchoolRecord(degree: string) {
+  return /school|class\s*(x|10|xi|11|xii|12)|sslc|hsc|higher secondary|secondary/i.test(
+    degree || ""
+  );
+}
 interface AdminStudioModalProps {
   open: boolean;
   initialTab?: string;
@@ -190,7 +195,20 @@ export function AdminStudioModal({
         body: JSON.stringify({
           section,
           id: editingId,
-          payload: { ...formData, isPlaceholder: false },
+          payload: {
+  ...formData,
+  ...(section === "education"
+    ? {
+        cgpa: isSchoolRecord(String(formData.degree || ""))
+          ? ""
+          : String(formData.cgpa || ""),
+        currentSemester: isSchoolRecord(String(formData.degree || ""))
+          ? "Completed"
+          : String(formData.currentSemester || ""),
+      }
+    : {}),
+  isPlaceholder: false,
+},
         }),
       });
       const json = await res.json();
@@ -755,8 +773,9 @@ export function AdminStudioModal({
                   </div>
 
                   {/* Instant Semester CGPA Quick-Update Card */}
-                  {portfolio.education.map((edu) => (
-                    <div
+                  {portfolio.education.map((edu) =>
+  isSchoolRecord(edu.degree) ? null : (
+    <div
                       key={edu.id}
                       className="rounded-2xl border border-cyan-500/30 bg-cyan-500/[0.04] p-5"
                     >
@@ -896,14 +915,16 @@ export function AdminStudioModal({
                         }
                         className="rounded-xl border border-white/15 bg-black/40 px-3.5 py-2 text-sm text-white"
                       />
-                      <input
-                        placeholder="CGPA (e.g. 8.92 / 10.0)"
-                        value={String(formData.cgpa || "")}
-                        onChange={(e) =>
-                          setFormData({ ...formData, cgpa: e.target.value })
-                        }
-                        className="rounded-xl border border-white/15 bg-black/40 px-3.5 py-2 text-sm text-white"
-                      />
+                      {!isSchoolRecord(String(formData.degree || "")) && (
+  <input
+    placeholder="CGPA (e.g. 8.92 / 10.0)"
+    value={String(formData.cgpa || "")}
+    onChange={(e) =>
+      setFormData({ ...formData, cgpa: e.target.value })
+    }
+    className="rounded-xl border border-white/15 bg-black/40 px-3.5 py-2 text-sm text-white"
+  />
+)}
                       <input
                         placeholder="Class 10 Marks / Percentage"
                         value={String(formData.class10Marks || "")}
